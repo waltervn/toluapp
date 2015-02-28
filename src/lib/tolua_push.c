@@ -79,7 +79,7 @@ TOLUA_API void tolua_pushusertype (lua_State* L, void* value, const char* type)
 
    #ifdef LUA_VERSION_NUM
    lua_pushvalue(L, TOLUA_NOPEER);
-   lua_setfenv(L, -2);
+   lua_setuservalue(L, -2);
    #endif
   }
   else

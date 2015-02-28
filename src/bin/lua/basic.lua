@@ -251,8 +251,9 @@ end
 
 -- concatenate all parameters, following output rules
 function concatparam (line, ...)
+ local arg = {...}
  local i=1
- while i<=arg.n do
+ while i<=#arg do
   if _cont and not strfind(_cont,'[%(,"]') and
      strfind(arg[i],"^[%a_~]") then
 	    line = line .. ' '
@@ -263,7 +264,7 @@ function concatparam (line, ...)
   end
   i = i+1
  end
- if strfind(arg[arg.n],"[%/%)%;%{%}]$") then
+ if strfind(arg[#arg],"[%/%)%;%{%}]$") then
   _cont=nil line = line .. '\n'
  end
 	return line
@@ -271,8 +272,9 @@ end
 
 -- output line
 function output (...)
+ local arg = {...}
  local i=1
- while i<=arg.n do
+ while i<=#arg do
   if _cont and not strfind(_cont,'[%(,"]') and
      strfind(arg[i],"^[%a_~]") then
 	    write(' ')
@@ -283,7 +285,7 @@ function output (...)
   end
   i = i+1
  end
- if strfind(arg[arg.n],"[%/%)%;%{%}]$") then
+ if strfind(arg[#arg],"[%/%)%;%{%}]$") then
   _cont=nil write('\n')
  end
 end

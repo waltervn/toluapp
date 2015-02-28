@@ -9,13 +9,13 @@ ESC1 = "\006"
 ESC2 = "\007"
 
 MASK = { -- the substitution order is important
- {ESC1, "\\'"},
- {ESC2, '\\"'},
- {STR1, "'"},
- {STR2, '"'},
- {STR3, "%[%["},
- {STR4, "%]%]"},
- {REM , "%-%-"},
+ {ESC1, "\\'", "\\'"},
+ {ESC2, '\\"', '\\"'},
+ {STR1, "'", "'"},
+ {STR2, '"', '"'},
+ {STR3, "%[%[", "[["},
+ {STR4, "%]%]", "]]"},
+ {REM , "%-%-", "--"},
 }
 
 function mask (s)
@@ -27,7 +27,7 @@ end
 
 function unmask (s)
  for i = 1,getn(MASK)  do
-  s = gsub(s,MASK[i][1],MASK[i][2])
+  s = gsub(s,MASK[i][1],MASK[i][3])
  end
  return s
 end
