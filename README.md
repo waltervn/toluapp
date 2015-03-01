@@ -2,7 +2,7 @@
 
 This is a patched version of tolua++ for Lua 5.2 and 5.3. Earlier versions of Lua are not supported.
 
-The 'master' branch has been converted to CMake. The 'lua52' branch contains the same changes with the original SCons build system intact.
+The 'master' branch has been converted to CMake. The 'lua52' branch contains the same core changes with the original SCons build system intact.
 
 **WARNING**
 
