@@ -8,12 +8,10 @@ assert(x==1 and y==2)
 assert(c[1]==0 and c[2]==0)
 
 q:set(4,5)
-q:setname("mypoint")
 p:setconst(q)
 local r = p:getpointer();
 x,y = r:get()
 assert(x==4 and y==5)
-assert(r:getname()=="mypoint")
 
 local s = Point:new()
 s:setref(r)
