@@ -10,7 +10,7 @@ target_link_libraries(tolua++_bootstrap
 
 add_custom_command(OUTPUT
 	"${CMAKE_CURRENT_BINARY_DIR}/toluabind.c"
-	COMMAND tolua++_bootstrap -o "${CMAKE_CURRENT_BINARY_DIR}/toluabind.c" "${PROJECT_SOURCE_DIR}/src/bin/tolua.pkg"
+	COMMAND tolua++_bootstrap -C -o "${CMAKE_CURRENT_BINARY_DIR}/toluabind.c" "${PROJECT_SOURCE_DIR}/src/bin/tolua.pkg"
 	DEPENDS tolua++_bootstrap
 	WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
 )
