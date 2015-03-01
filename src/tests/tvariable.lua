@@ -1,5 +1,3 @@
-dofile("myassert.lua")
-
 assert(i==1)
 assert(f==2)
 assert(d==3)

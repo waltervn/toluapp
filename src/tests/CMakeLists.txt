@@ -1,27 +1,35 @@
-if(BUILD_TESTING)
+include_directories(
+	"${CMAKE_CURRENT_SOURCE_DIR}"
+)
+
+function(build_test NAME FILE)
+	get_filename_component(BASE "${FILE}" NAME_WE)
+	get_filename_component(EXT "${FILE}" EXT)
+
 	add_custom_command(OUTPUT
-		"${CMAKE_CURRENT_BINARY_DIR}/tvariablebind.c"
-		COMMAND tolua++ -o "${CMAKE_CURRENT_BINARY_DIR}/tvariablebind.c" tvariable.pkg
-		DEPENDS tolua++
+		"${CMAKE_CURRENT_BINARY_DIR}/${BASE}bind${EXT}"
+		COMMAND tolua++ -o "${CMAKE_CURRENT_BINARY_DIR}/${BASE}bind${EXT}" "${BASE}.pkg"
+		DEPENDS tolua++ "${BASE}.pkg"
 		WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
 	)
 
-	include_directories(
-		"${CMAKE_CURRENT_SOURCE_DIR}"
+	add_executable("${BASE}"
+		"${FILE}"
+		"${BASE}bind${EXT}"
 	)
 
-	add_executable(tvariable
-		tvariable.c
-		tvariablebind.c
-	)
-
-	target_link_libraries(tvariable
+	target_link_libraries("${BASE}"
 		libtolua++
 		${LUA_LIBRARY}
 	)
 
-	add_test(NAME Variable
-		COMMAND "${CMAKE_BINARY_DIR}/bin/tvariable"
+	add_test(NAME "${NAME}"
+		COMMAND "${CMAKE_BINARY_DIR}/bin/${BASE}"
 		WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
 	)
+endfunction()
+
+if(BUILD_TESTING)
+	build_test("Variable" "tvariable.c")
+	build_test("Constant" "tconstant.cpp")
 endif()
