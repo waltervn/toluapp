@@ -3,9 +3,14 @@ add_executable(tolua++_bootstrap
 	toluabind_default.c
 )
 
+if(UNIX AND NOT APPLE)
+	find_library(DL_LIBRARY dl)
+	list(APPEND LUA_LIBRARIES ${DL_LIBRARY})
+endif()
+
 target_link_libraries(tolua++_bootstrap
 	libtolua++
-	"${LUA_LIBRARY}"
+	"${LUA_LIBRARIES}"
 )
 
 add_custom_command(OUTPUT
@@ -22,5 +27,5 @@ add_executable(tolua++
 
 target_link_libraries(tolua++
 	libtolua++
-	"${LUA_LIBRARY}"
+	"${LUA_LIBRARIES}"
 )
