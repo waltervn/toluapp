@@ -4,14 +4,20 @@ $#include "lauxlib.h"
 $int a;
 $extern int a;
 
-$int main (void)
 ${
-$ lua_State* L = lua_open();
-$	luaopen_base(L);
-$ tolua_tdirective_open(L);
-$	lua_dofile(L,"tdirective.lua");
-$	lua_close(L);
-$ return 0;
+int main (void)
+{
+	int errcode = 0;
+	lua_State* L = luaL_newstate();
+	luaopen_base(L);
+	tolua_tdirective_open(L);
+	if (luaL_dofile(L,"tdirective.lua") != 0) {
+		fprintf(stderr, "%s", lua_tostring(L,-1));
+		errcode = 1;
+	}
+	lua_close(L);
+	return errcode;
+}
 $}
 
 $pfile "tdirectivepkg.pkg"
