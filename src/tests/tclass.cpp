@@ -6,27 +6,30 @@ extern "C" {
 
 #include "tclass.h"
 
-//Test::Tst_A* Test::Tst_A::last;
-//Test::Tst_B* Test::Tst_B::last;
-//Test::Tst_C* Test::Tst_C::last;
 
-extern "C" {
-	int  tolua_tclass_open (lua_State*);
-}
+#include <stdlib.h>
+
+Tst_A* Tst_A::last;
+Tst_B* Tst_B::last;
+Tst_C* Tst_C::last;
+
 
 int main ()
 {
-	Test::Tst_B* b = new Test::Tst_B;         // instance used in Lua code
+  int errcode = 0;
+  Tst_B* b = new Tst_B;         // instance used in Lua code
+  int  tolua_tclass_open (lua_State*);
 
-	lua_State* L = lua_open();
-	luaL_openlibs(L);
-	tolua_tclass_open(L);
+  lua_State* L = luaL_newstate();
+  luaL_openlibs(L);
+  tolua_tclass_open(L);
+  if (luaL_dofile(L,"tclass.lua") != 0) {
+    fprintf(stderr, "%s", lua_tostring(L,-1));
+    errcode = 1;
+  }
+  lua_close(L);
 
-	luaL_dofile(L,"tclass.lua");
-
-	lua_close(L);
-
-	delete b;
-	return 0;
+  delete b;
+  return errcode;
 }
 
