@@ -1,4 +1,4 @@
-$#include "tclass.h"
+$#include "ttoluapp.h"
 
 $Test::Tst_A* Test::Tst_A::last;
 $Test::Tst_B* Test::Tst_B::last;

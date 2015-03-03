@@ -31,7 +31,7 @@ function(build_test FILE)
 
 	target_link_libraries("${BASE}"
 		libtolua++
-		${LUA_LIBRARY}
+		${LUA_LIBRARIES}
 	)
 
 	add_test(NAME "${BASE}"
@@ -48,4 +48,5 @@ if(BUILD_TESTING)
 	build_test("tdirective.pkg")
 	build_test("tarray.c")
 	build_test("tclass.cpp")
+	build_test("ttoluapp.cpp")
 endif()
