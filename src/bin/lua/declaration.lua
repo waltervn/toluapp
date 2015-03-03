@@ -81,9 +81,10 @@ function classDeclaration:checkname ()
 	 self.type = 'char*'
  end
 
-	if self.kind and self.kind == 'var' then
-		self.name = string.gsub(self.name, ":.*$", "") -- ???
-	end
+ -- this code breaks variables in namespaces, what is its purpose?
+--	if self.kind and self.kind == 'var' then
+--		self.name = string.gsub(self.name, ":.*$", "") -- ???
+--	end
 end
 
 -- Check declaration type
