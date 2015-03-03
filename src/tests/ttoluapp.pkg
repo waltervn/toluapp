@@ -20,7 +20,7 @@ class Tst_A
 	{
 		Tst_AA () {}
 		~Tst_AA () {}
-		char* aa () { return "AA"; }
+		const char* aa () { return "AA"; }
 	};
 	class Tst_BB : public Tst_AA
 	{

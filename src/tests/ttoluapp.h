@@ -16,13 +16,13 @@ class Tst_A
 public:
 	static Tst_A* last;
 	Tst_A () {last = this;}
-	virtual char* a () { return "A"; }
+	virtual const char* a () { return "A"; }
 	class Tst_AA
 	{
  public:
 		Tst_AA () {}
 		~Tst_AA () { }
-		char* aa () { return "AA"; }
+		const char* aa () { return "AA"; }
 	};
 	class Tst_BB : public Tst_AA
 	{
@@ -43,7 +43,7 @@ class Tst_B : public Tst_A
 public:
 	static Tst_B* last;
 	Tst_B () {last = this;}
-	virtual char* b () { return "B"; }
+	virtual const char* b () { return "B"; }
 
 	static Tst_A* create() {return new Tst_B;};
 	static void* create_void() {return new Tst_B;};
@@ -58,7 +58,7 @@ public:
 	static Tst_C* last;
 	Tst_C (int n) : i(n) {last = this;}
  virtual ~Tst_C () { printf("deleting C: %d\n",i); }
-	virtual char* c () { return "C"; }
+	virtual const char* c () { return "C"; }
 };
 
 inline Tst_A::Tst_AA* Tst_create_aa ()
