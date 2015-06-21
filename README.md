@@ -6,4 +6,4 @@ The 'master' branch has been converted to CMake. The 'lua52' branch contains the
 
 **WARNING**
 
-The patch is probably incomplete at this time. Use at your own risk!
+The patch might be incomplete at this time. Use at your own risk!
