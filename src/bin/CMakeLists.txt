@@ -13,10 +13,14 @@ target_link_libraries(tolua++_bootstrap
 	"${LUA_LIBRARIES}"
 )
 
-add_custom_command(OUTPUT
-	"${CMAKE_CURRENT_BINARY_DIR}/toluabind.c"
+file(GLOB LUA_FILES
+	RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
+	"lua/*.lua"
+)
+
+add_custom_command(OUTPUT toluabind.c
 	COMMAND tolua++_bootstrap -C -o "${CMAKE_CURRENT_BINARY_DIR}/toluabind.c" tolua.pkg
-	DEPENDS tolua++_bootstrap tolua.pkg lua/*.lua
+	DEPENDS tolua++_bootstrap tolua.pkg ${LUA_FILES}
 	WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 
